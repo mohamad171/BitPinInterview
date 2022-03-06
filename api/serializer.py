@@ -45,7 +45,6 @@ class PostSerializer(serializers.ModelSerializer):
         :param obj:
         :return:
         """
-        obj.rates.annotate()
         return obj.rates.annotate(sum_rate=Sum("rate_number")).aggregate(average=Avg("sum_rate"))
     def user_rate_func(self,obj):
         """
